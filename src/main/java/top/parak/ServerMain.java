@@ -24,8 +24,6 @@ public class ServerMain {
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup(); //8
 
-
-
         try {
             //创建服务器端的启动对象，配置参数
             ServerBootstrap bootstrap = new ServerBootstrap();
@@ -53,17 +51,13 @@ public class ServerMain {
 
             //给cf 注册监听器，监控我们关心的事件
 
-            cf.addListener(new ChannelFutureListener() {
-                @Override
-                public void operationComplete(ChannelFuture future) throws Exception {
-                    if (cf.isSuccess()) {
-                        System.out.println("监听端口 6668 成功");
-                    } else {
-                        System.out.println("监听端口 6668 失败");
-                    }
+            cf.addListener((ChannelFutureListener) future -> {
+                if (cf.isSuccess()) {
+                    System.out.println("监听端口 6668 成功");
+                } else {
+                    System.out.println("监听端口 6668 失败");
                 }
             });
-
 
             //对关闭通道进行监听
             cf.channel().closeFuture().sync();

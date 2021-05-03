@@ -16,7 +16,6 @@ public class Map {
         this.map = new int[FrameData.boxRow][FrameData.boxCol];
     }
 
-
     public void drawMap(Graphics g) {
         g.setColor(Color.pink);
         for (int i = 0; i < map.length; i++) {
@@ -35,7 +34,6 @@ public class Map {
             }
         }
     }
-
 
     public int[][] getMap() {
         return map;

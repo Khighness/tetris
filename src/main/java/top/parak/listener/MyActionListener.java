@@ -151,13 +151,13 @@ public class MyActionListener implements ActionListener {
                 if (FrameData.musicOpen) {
                     FrameData.musicOpen = false;
                     MusicUtil.player.close();
-                    MusicUtil.isplayed=false;
-                    myFrame.getJmenuItem8().setText("音乐：开");
+                    MusicUtil.palying =false;
+                    myFrame.getMenuItem8().setText("音乐：开");
                 } else {
                     FrameData.musicOpen = true;
                     MusicUtil.musicOpen(FrameData.musicName);
-                    MusicUtil.isplayed=true;
-                    myFrame.getJmenuItem8().setText("音乐：关");
+                    MusicUtil.palying =true;
+                    myFrame.getMenuItem8().setText("音乐：关");
                 }
                 break;
             case "自定义确定":
@@ -191,11 +191,11 @@ public class MyActionListener implements ActionListener {
                     if (!customPanel.getjCheckBox6().isSelected()) {
                         FrameData.musicOpen = false;
                         MusicUtil.player.close();
-                        MusicUtil.isplayed=false;
+                        MusicUtil.palying =false;
                     } else {
                         FrameData.musicOpen = true;
-                        System.out.println(MusicUtil.isplayed);
-                        if (!MusicUtil.isplayed){
+                        System.out.println(MusicUtil.palying);
+                        if (!MusicUtil.palying){
                             MusicUtil.musicOpen(FrameData.musicName);
                         }
                     }

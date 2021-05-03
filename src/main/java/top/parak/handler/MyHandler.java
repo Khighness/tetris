@@ -16,22 +16,15 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * 类名：MyHandler
- * 作用：
- * 作者：陈铭
- * 日期：2021.02.23
- */
-
-/**
  * @author KHighness
  * @since 2021-05-01
  * @apiNote 解析服务器端发来的数据
  */
 public class MyHandler extends ChannelInboundHandlerAdapter {
-    private  String userName=UUID.randomUUID().toString();
-    private  String taegetName="";
-    private volatile ChannelHandlerContext ctx=null;
-    private MyFrame myFrame=null;
+    private final String userName = UUID.randomUUID().toString();
+    private String targetName = "";
+    private volatile ChannelHandlerContext ctx = null;
+    private MyFrame myFrame = null;
 
     public MyHandler(MyFrame myFrame) {
         this.myFrame=myFrame;
@@ -48,7 +41,7 @@ public class MyHandler extends ChannelInboundHandlerAdapter {
         ByteBuf buf = (ByteBuf) msg;
         String message = buf.toString(CharsetUtil.UTF_8);
         if (message.contains("找到玩家：")){
-            taegetName=message.substring(4);
+            targetName =message.substring(4);
             FrameData.isAlone=false;
             FrameData.findUser=true;
             int num = JOptionPane.showConfirmDialog(null, "是否准备...", "找到玩家", JOptionPane.YES_NO_OPTION);
@@ -59,7 +52,6 @@ public class MyHandler extends ChannelInboundHandlerAdapter {
                     Thread.sleep(20);
                     ctx.channel().writeAndFlush(Unpooled.copiedBuffer(userName + "：已准备", CharsetUtil.UTF_8));
                 }
-
                 FrameData.userReady=true;
                 if (FrameData.targetReady){
                     FrameData.isStart=true;
@@ -81,17 +73,14 @@ public class MyHandler extends ChannelInboundHandlerAdapter {
             //对方不准备，只能重新搜索玩家
             String userName0 = message.split("：")[0];
             if (userName0.equals(userName)){
-                //自己取消的,直接进行单机游戏。但仍然可以再次进行搜索玩家，连接还在
-
+                //自己取消的，直接进行单机游戏。但仍然可以再次进行搜索玩家，连接还在
                 FrameData.isAlone=true;
                 FrameData.findUser=false;
                 FrameData.targetReady=false;
                 FrameData.userReady=false;
-
                 FrameData.isStart=true;
                 myFrame.getMyJPanel().getBlock().randomBlock();
-
-            }else {
+            } else {
                 //对方取消的
                 int num = JOptionPane.showConfirmDialog(null, "对方取消准备,进行单机游戏...", "取消准备", JOptionPane.CLOSED_OPTION);
                 FrameData.isAlone=true;
@@ -102,12 +91,10 @@ public class MyHandler extends ChannelInboundHandlerAdapter {
                 FrameData.isStart=true;
                 myFrame.getMyJPanel().getBlock().randomBlock();
             }
-        }else if (message.contains("当前情况")){
-
+        } else if (message.contains("当前情况")){
             if (!message.substring(message.length()-1).equals("@")){
                 return;
             }
-
 
             //获取对方地图
             String mapString = message.split("：")[2];
@@ -115,8 +102,6 @@ public class MyHandler extends ChannelInboundHandlerAdapter {
             String blockClass = message.split("：")[4];
             FrameData.targetBlockX = Integer.parseInt(message.split("：")[5]);
             FrameData.targetBlockY = Integer.parseInt(message.split("：")[6]);
-
-
             List<String> strings = JSON.parseArray(mapString, String.class);
             int m=0;
             int n=0;
@@ -129,8 +114,6 @@ public class MyHandler extends ChannelInboundHandlerAdapter {
                 n=0;
                 m++;
             }
-
-
             for (int i = 0; i <FrameData.boxRow ; i++) {
                 for (int j = 0; j < FrameData.boxCol ; j++) {
                     FrameData.targetMap[i][j]=0;
@@ -142,15 +125,13 @@ public class MyHandler extends ChannelInboundHandlerAdapter {
             //获取对方方块
             FrameData.targetBlockDirection=Integer.parseInt(direction);
             FrameData.targetBlockClass=Integer.parseInt(blockClass);
-
             myFrame.repaint();
-
-        }else if (message.contains("发起攻击")){
+        } else if (message.contains("发起攻击")){
             synchronized (FrameData.onlineLock) {
                 FrameData.onlineDifficulty -= 40;
                 FrameData.targetScore++;
             }
-        }else if (message.contains("已经触顶")){
+        } else if (message.contains("已经触顶")){
             int num = JOptionPane.showConfirmDialog(null, "对方已经失败，您还继续吗？（是：进行单机游戏，否：离开游戏）", "对局结束", JOptionPane.YES_NO_OPTION);
             if (num==0){
                 //单机
@@ -172,8 +153,7 @@ public class MyHandler extends ChannelInboundHandlerAdapter {
                 //离开
                 System.exit(0);
             }
-
-        }else if (message.contains("离开游戏")){
+        } else if (message.contains("离开游戏")){
             int num = JOptionPane.showConfirmDialog(null, "对方已经失败，您还继续吗？（是：进行单机游戏，否：离开游戏）", "对局结束", JOptionPane.YES_NO_OPTION);
             if (num==0){
                 //单机
@@ -212,14 +192,13 @@ public class MyHandler extends ChannelInboundHandlerAdapter {
         return userName;
     }
 
-    public String getTaegetName() {
-        return taegetName;
+    public String getTargetName() {
+        return targetName;
     }
 
     public ChannelHandlerContext getCtx() {
         return ctx;
     }
-
 
     /**
      * 作用：供DropThread线程类根据业务发送数据

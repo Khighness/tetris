@@ -13,7 +13,6 @@ public class PlayerGroup {
     private Channel user1;
     private String user1Name;
 
-
     public PlayerGroup() {
     }
 

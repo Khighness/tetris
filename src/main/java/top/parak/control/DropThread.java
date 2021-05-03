@@ -28,7 +28,7 @@ public class DropThread extends Thread {
         super.run();
         //播放音乐
         MusicUtil.musicOpen(FrameData.musicName);
-        MusicUtil.isplayed=true;
+        MusicUtil.palying =true;
 
         //连接Netty
         MyHandler myHandler = FrameData.myHandler;
@@ -64,7 +64,6 @@ public class DropThread extends Thread {
         }
 
         while (true) {
-
             try {
                 if (FrameData.isAlone){
                     Thread.sleep(FrameData.difficulty);
@@ -78,8 +77,6 @@ public class DropThread extends Thread {
             }
             if (FrameData.isStart) {
                 if (FrameData.isBottom) {
-
-
                     int[][] drawBlock = block.getBlock()[FrameData.direction];
                     for (int i = block.getY(), ii = 0; i < block.getY() + 3; i++, ii++) {
                         for (int j = block.getX(), jj = 0; j < block.getX() + 3; j++, jj++) {
@@ -103,16 +100,12 @@ public class DropThread extends Thread {
                             }
                         }
 
-
                         for (int j = 0; j < FrameData.boxCol; j++) {
                             if (j != col) {
                                 map1[FrameData.boxRow - 1][j] = 1;
                             }
                         }
-
-
                     }
-
 
                     //是否触顶
                     for (int i = 0; i < 3; i++) {

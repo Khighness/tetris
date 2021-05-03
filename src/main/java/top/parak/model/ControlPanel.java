@@ -20,7 +20,7 @@ public class ControlPanel extends JPanel {
 
     public ControlPanel() {
         this.setLayout(null);
-        jLabel.setBounds(0,0, FrameData.boxWidth*4,FrameData.boxWidth);
+        jLabel.setBounds(0,0, FrameData.boxWidth * 4, FrameData.boxWidth);
         this.add(jLabel);
         jLabe2.setBounds(0,FrameData.boxWidth*1,FrameData.boxWidth*4,FrameData.boxWidth);
         this.add(jLabe2);

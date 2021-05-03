@@ -12,7 +12,6 @@ import io.netty.util.CharsetUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * @author KHighness
  * @since 2021-05-01

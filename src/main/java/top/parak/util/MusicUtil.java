@@ -12,12 +12,11 @@ import java.net.URL;
  */
 public class MusicUtil {
     public static Player player = null;
-    public volatile static boolean isplayed = false;
+    public volatile static boolean palying = false;
 
     /**
      * 方法名：musicOpen
      * 作用：打开音乐
-     *
      * @param fileName 音乐文件的名字
      */
     public static void musicOpen(String fileName) {
@@ -26,19 +25,15 @@ public class MusicUtil {
             public void run() {
                 try {
                     URL music = MusicUtil.class.getClassLoader().getResource("music");
-
-                    File file = new File(music.getFile()+"/"+fileName);
-                    FileInputStream fileInputStream = new FileInputStream(file);
-                    //创建一个缓冲流
-                    BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
+                    File file = new File(music.getFile() + "/" + fileName);
                     player = new Player(new FileInputStream(file));
                     player.play();
-                    isplayed=true;
+                    palying = true;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }).start();
+    }
 
-}
 }

@@ -53,9 +53,6 @@ public class JsonUtil {
             strings.add(s.substring(0,s.length()-1));
             s="";
         }
-
         return JSON.toJSONString(strings);
     }
-
-
 }

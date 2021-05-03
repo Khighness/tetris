@@ -44,8 +44,6 @@ public class Block  {
      * 作用：随机生成新的方块类型
      */
     public void randomBlock(){
-
-//        FrameData.blocksArray;
         int index0=-1;
         int index1=-1;
 
@@ -64,8 +62,6 @@ public class Block  {
                     break;
                 }
             }
-//            FrameData.nextBlock=random.nextInt(5);
-//            FrameData.blockClass=random.nextInt(5);
         }else {
             FrameData.blockClass= FrameData.nextBlock;
             while (true){
@@ -75,9 +71,7 @@ public class Block  {
                     break;
                 }
             }
-//            FrameData.nextBlock=random.nextInt(5);
         }
-
         switch (FrameData.blockClass){
             case 0:
                 this.block = FrameData.L1_blocks;
@@ -97,7 +91,6 @@ public class Block  {
         }
     }
 
-
     public int getX() {
         return x;
     }
@@ -105,7 +98,6 @@ public class Block  {
     public void setX(int x) {
         this.x = x;
     }
-
 
     public int getY() {
         return y;

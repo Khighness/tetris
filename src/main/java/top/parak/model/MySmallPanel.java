@@ -12,29 +12,24 @@ import java.awt.*;
  */
 public class MySmallPanel extends JPanel {
 
-    private Block block;
-    private JLabel jLabel=new JLabel("下");
-    private JLabel jLabe2=new JLabel("个");
-    private JLabel jLabe3=new JLabel("方");
-    private JLabel jLabe4=new JLabel("块");
+    private final Block block;
+    private final JLabel label1 = new JLabel("下");
+    private final JLabel label2 = new JLabel("个");
+    private final JLabel label3 = new JLabel("方");
+    private final JLabel label4 = new JLabel("块");
 
     public MySmallPanel(Block block) {
         this.setLayout(null);
-        this.block=block;
-
+        this.block = block;
         int width = FrameData.smallBoxWidth * 3 / 4;
-
-
-        jLabel.setBounds(0,0,width,width);
-        this.add(jLabel);
-        jLabe2.setBounds(0,width*1,width,width);
-        this.add(jLabe2);
-        jLabe3.setBounds(0,width*2,width,width);
-        this.add(jLabe3);
-        jLabe4.setBounds(0,width*3,width,width);
-        this.add(jLabe4);
-
-
+        label1.setBounds(0,0,width, width);
+        this.add(label1);
+        label2.setBounds(0,width * 1, width, width);
+        this.add(label2);
+        label3.setBounds(0,width * 2, width, width);
+        this.add(label3);
+        label4.setBounds(0,width * 3, width, width);
+        this.add(label4);
     }
 
     @Override

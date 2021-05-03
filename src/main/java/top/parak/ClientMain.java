@@ -13,3 +13,10 @@ public class ClientMain {
         dropThread.start();
     }
 }
+
+class Rival {
+    public static void main(String[] args) {
+        DropThread dropThread = new DropThread();
+        dropThread.start();
+    }
+}
